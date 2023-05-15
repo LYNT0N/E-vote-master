@@ -1,0 +1,21 @@
+{% extends 'kura/base.html' %}
+
+{% block content %}
+  <h1>Vote</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% for position in positions %}
+      <h3>{{ position.title }}</h3>
+      {% for candidate in position.candidate_set.all %}
+        <label>
+          <input type="radio" name="position_{{ position.id }}" value="{{ candidate.id }}">
+          {{ candidate.name }}
+        </label>
+      {% endfor %}
+    {% endfor %}
+    <br>
+    <button type="submit">Vote</button>
+  </form>
+{% endblock %}
+
+

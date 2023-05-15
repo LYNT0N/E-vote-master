@@ -1,0 +1,16 @@
+{% extends 'kura/base.html' %}
+{% for post in posts %}
+    <h2>{{ post.title }}</h2>
+    <ul>
+        {% for candidate in post.candidates.all %}
+            <li>
+                <input type="radio" id="candidate{{ candidate.id }}" name="candidate" value="{{ candidate.id }}">
+                <label for="candidate{{ candidate.id }}">{{ candidate.name }}</label>
+            </li>
+        {% endfor %}
+    </ul>
+    <form method="post" action="{% url 'vote' post.id %}">
+        {% csrf_token %}
+        <input type="submit" value="Vote">
+    </form>
+{% endfor %}

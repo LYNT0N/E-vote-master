@@ -1,0 +1,23 @@
+{% extends 'kura/base.html' %}
+
+{% block content %}
+  <h1>Results</h1>
+  {% for position, position_results, winner in results %}
+    <h3>{{ position.title }}</h3>
+    {% if position_results %}
+      <ul>
+        {% for candidate, votes in position_results %}
+          <li>{{ candidate.name }}: {{ votes }} votes</li>
+        {% endfor %}
+      </ul>
+      {% if winner %}
+        <p>Winner: {{ winner.name }}</p>
+      {% else %}
+        <p>No winner for this position yet.</p>
+      {% endif %}
+    {% else %}
+      <p>No votes for this position yet.</p>
+    {% endif %}
+    <hr>
+  {% endfor %}
+{% endblock %}
